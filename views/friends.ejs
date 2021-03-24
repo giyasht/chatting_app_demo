@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2><%= user.username %>'s friends</h2>
+    <% var roomname;%>
+    <% if(user.friends) {%>
+        <% user.friends.forEach((friend)=>{ %>
+            <% if(user.username < friend.friends_username){ %>
+                <% roomname = user.username + friend.friends_username;%>
+            <% }else{ %>
+                <% roomname = friend.friends_username + user.username; %>
+            <% } %>
+            <div>
+                <a href="/chatting/<%=roomname%>"><%=friend.friends_username%></a>
+            </div>
+        <% }) %>
+    <%}%>
+    <form action="/newfriend" method="POST">
+        <input type="text" name="friends_username" placeholder="Friend's name">
+        <input type="submit" value="submit">
+    </form>
+</body>
+</html>
